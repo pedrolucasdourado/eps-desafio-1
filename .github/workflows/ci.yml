@@ -1,0 +1,44 @@
+name: CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+
+      - name: python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.12.3
+      
+      - name: upgrade pip
+        run: pip install --upgrade pip
+
+      - name: install poetry
+        run: pip install poetry
+        
+      - name: Configurar ambiente virtual do Poetry
+        run: poetry config virtualenvs.in-project true
+
+      - name: Instalar dependências
+        run: poetry install
+
+      - name: Poetry Bandit
+        run: poetry run bandit -r src/
+
+      - name: Poetry Safety
+        run: poetry run safety check
+      
+      - name: Poetry Ruff
+        run: poetry run ruff check src/
+

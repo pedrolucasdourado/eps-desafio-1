@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "primeiro-desafio-eps"
+version = "0.1.0"
+description = "Primeiro desafio de eps usando poetry"
+authors = ["Pedro Lucas Dourado <pedrolucasdourado@hotmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "3.12.3"
+
+
+[tool.poetry.group.dev.dependencies]
+bandit = "^1.9.4"
+safety = "^3.7.0"
+ruff = "^0.15.8"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
